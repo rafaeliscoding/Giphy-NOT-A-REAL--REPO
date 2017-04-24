@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
 import Header from './header.js';
-import Search from './search.js';
-import GiphyApi from './giphyApi.js';
-import './App.css';
+// import Search from './search.js';
+// import GiphyApi from './giphyApi.js';
 import GiphyStore from './giph-store.js';
 import * as GiphyActions from './actions.js';
+import Giphs from './giphs.js';
 import _ from 'lodash';
+import './App.css';
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      data: GiphyStore.getAll(),
+      data: GiphyStore.getAll()
     }
     // this.createData = this.createData.bind(this);
   }
   render() {
-    let data = _.map(this.state.data, (item)=>{
-      return <h2 style={{color: 'white'}} key={item.id}>{item.data}</h2>
-    })
+    console.log("store data: ", this.state.data);
+    const listItems = this.state.data.map((number) =>
+        <li>{number}</li>
+);
     return (
       <div className="App">
-        {data}
+        {listItems}
+
         <Header />
-        <GiphyApi />
+        {/* <GiphyApi /> */}
       <button onClick={()=>{
-          this.createData("testing yes!!")
-        }}>Create Data</button>
+          this.callApi("testing yes!!")
+        }}>Call Api</button>
+      <Giphs data={this.state.data} />
+
 
       </div>
     );
@@ -35,13 +40,16 @@ class App extends Component {
   componentWillMount(){
     GiphyStore.on('change', ()=>{
       this.setState({
-        data: GiphyStore.getAll(),
+        data: GiphyStore.getAll()
       })
     })
   }
   //calls action which updates the store
   createData(test){
     GiphyActions.createData(test);
+    }
+    callApi(search){
+      GiphyActions.callApi(search);
     }
   }
 

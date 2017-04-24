@@ -8,7 +8,6 @@ class GiphyApi extends Component{
   constructor(props){
     super(props);
     this.state = {
-
     }
     // this.searchApi = this.searchApi.bind(this);
   }
@@ -34,7 +33,7 @@ class GiphyApi extends Component{
       <div>
         {/* <h2>{movieT}</h2> */}
         {/* <button onClick={this.loadApi}>Api Data!!</button> */}
-        <Search />
+        {/* <Search /> */}
 
       </div>
     )

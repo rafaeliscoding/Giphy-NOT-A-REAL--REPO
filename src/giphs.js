@@ -1,35 +1,40 @@
 import React, {Component} from "react";
 import _ from 'lodash';
 import LazyLoad from 'react-image-lazy-load';
+import GiphyStore from './giph-store.js';
+import * as GiphyActions from './actions.js';
+
 
 class Giphs extends Component{
   constructor (props){
     super(props);
-    this.state={
-
-    }
-
-
   }
   componentDidMount(){
 
   }
 
-  renderImage(imgSrc){
-    return (
-      <div>
-        <img src={imgSrc} />
-      </div>
-    )
-  }
 
   render (){
 
     // console.log("from giphs", this.props.data)
-    const giphsT = _.map(this.props.data, (giph, index)=>{
-      let delay = (index*.2);
-      return <div className="wrapper"  key = {index}>
-        <img src={giph.images.downsized.url} className="item hover bounce" style={{animationDelay: `${delay}s`}} />
+    console.log("giph component::: ", this.props.data);
+    let giph = this.props.data.map((g)=>{
+      console.log("asdfsadf", g);
+    })
+    return (
+      <div className="masonry">
+
+      </div>
+    )
+
+    // this.props.data.map((giph, index)=>{});
+
+
+    // const giphsT = _.map(this.props.data, (giph, index)=>{
+    //   console.log("gihp: ",giph);
+    //   let delay = (index*.2);
+    //   return <div className="wrapper"  key = {index}>
+    //     <img src={giph.images.downsized.url} className="item hover bounce" style={{animationDelay: `${delay}s`}} />
         {/* <LazyLoad
         loaderImage
 
@@ -43,16 +48,12 @@ class Giphs extends Component{
 
     }} /> */}
 
-  </div>
+  // </div>
 
       // return <img className="item" style={{"animationDelay": delay+"s"}} key={index} src={giph.images.downsized.url} />
-    });
+    // });
 
-    return (
-      <div className="masonry">
-        {giphsT}
-      </div>
-    )
+
   }
 }
 
