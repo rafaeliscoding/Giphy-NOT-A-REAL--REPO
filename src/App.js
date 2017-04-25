@@ -12,31 +12,12 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      data: GiphyStore.getAll()
+      data: {
+        "0": []
+      }
     }
     // this.createData = this.createData.bind(this);
   }
-  render() {
-    console.log("store data: ", this.state.data);
-    const listItems = this.state.data.map((number) =>
-        <li>{number}</li>
-);
-    return (
-      <div className="App">
-        {listItems}
-
-        <Header />
-        {/* <GiphyApi /> */}
-      <button onClick={()=>{
-          this.callApi("testing yes!!")
-        }}>Call Api</button>
-      <Giphs data={this.state.data} />
-
-
-      </div>
-    );
-  }
-
   componentWillMount(){
     GiphyStore.on('change', ()=>{
       this.setState({
@@ -44,14 +25,44 @@ class App extends Component {
       })
     })
   }
+  render() {
+    // console.log("App data in STATE (passed to giph as props): ", typeof this.state.data, "length: ", Object.keys(this.state.data));
+    const listItems = this.state.data[0].map((number, i) =>{
+        // console.log("Number: ", number)
+        // return <img key={`item-${i}`} src={number.images.downsized.url} />
+      }
+    );
+    return (
+      <div className="App">
+        {listItems}
+
+        <Header />
+      <div>
+        <input type="text" ref="search" />
+      <button onClick={()=>{
+         this.searchApi(this.refs.search)
+      }} />
+      </div>
+        {/* <GiphyApi /> */}
+      <button onClick={()=>{
+          this.callApi("funny cats")
+        }}>Call Api</button>
+      <Giphs data={this.state.data[0]} />
+
+
+      </div>
+    );
+  }
+
   //calls action which updates the store
   createData(test){
     GiphyActions.createData(test);
-    }
-    callApi(search){
-      GiphyActions.callApi(search);
-    }
   }
+
+  callApi(search){
+    GiphyActions.callApi(search);
+  }
+}
 
 
 

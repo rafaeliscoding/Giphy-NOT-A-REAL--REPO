@@ -8,6 +8,7 @@ import * as GiphyActions from './actions.js';
 class Giphs extends Component{
   constructor (props){
     super(props);
+
   }
   componentDidMount(){
 
@@ -16,14 +17,18 @@ class Giphs extends Component{
 
   render (){
 
-    // console.log("from giphs", this.props.data)
-    console.log("giph component::: ", this.props.data);
-    let giph = this.props.data.map((g)=>{
+// console.log("props in giph: ",this.props.data);
+    let giphs = this.props.data.map((g,i)=>{
       console.log("asdfsadf", g);
+      return (
+        <div className="item" key={`giph-${i}`}>
+          <img src={g.images.downsized.url} />
+        </div>
+      )
     })
     return (
       <div className="masonry">
-
+        {giphs}
       </div>
     )
 
